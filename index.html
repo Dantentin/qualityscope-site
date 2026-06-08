@@ -459,11 +459,31 @@
   }, {threshold:.14});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
+  document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const f = e.currentTarget;
     if (!f.checkValidity()) { f.reportValidity(); return; }
-    f.classList.add('sent');
+    const btn = f.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours…';
+    try {
+      const res = await fetch('https://formspree.io/f/maqzoeoe', {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        f.classList.add('sent');
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = 'Envoyer le message <span class="ar">↗</span>';
+        alert('Une erreur est survenue. Merci de réessayer ou d\'écrire directement à valentin@qualityscope.fr');
+      }
+    } catch {
+      btn.disabled = false;
+      btn.innerHTML = 'Envoyer le message <span class="ar">↗</span>';
+      alert('Une erreur est survenue. Merci de réessayer ou d\'écrire directement à valentin@qualityscope.fr');
+    }
   });
 </script>
 </body>
