@@ -407,4 +407,5 @@ h2.title{ font-size:clamp(30px,4.4vw,56px); max-width:18ch; }
   .scope--a{ width:440px; right:-180px; opacity:.35; }
   .heroA__meta{ font-size:11px; gap:12px; }
   .strip__row{ gap:18px; }
+  .footer__row{ grid-template-columns:1fr; padding:40px var(--gutter) 32px; gap:28px; }
 }
