@@ -32,9 +32,10 @@
 }
 
 *{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+html{ scroll-behavior:smooth; overflow-x:hidden; }
 body{
   margin:0;
+  overflow-x:hidden;
   font-family:var(--font);
   color:var(--text);
   background:var(--paper);
